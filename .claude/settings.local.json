@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(pnpm add:*)",
+      "WebFetch(domain:llmtxt.org)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:notes.aimodels.fyi)"
     ],
     "deny": [],
     "ask": []

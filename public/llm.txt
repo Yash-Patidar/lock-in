@@ -1,0 +1,37 @@
+# Lock-In - Ultimate Productivity & Focus App
+
+Lock-In is a comprehensive productivity application designed to help users maximize their focus and accomplish more with less distraction.
+
+## Key Features
+- **Pomodoro Timer**: Customizable focus sessions with work/break intervals
+- **Task Management**: Add, organize, and track your daily tasks
+- **Progress Heatmap**: Visual representation of your productivity streaks
+- **Dynamic Themes**: Multiple beautiful themes for personalized experience
+- **Keyboard Shortcuts**: Efficient navigation and control
+- **Real-time Statistics**: Track your focus sessions and productivity metrics
+
+## Technology Stack
+- Next.js 15 with React 19
+- TypeScript for type safety
+- Tailwind CSS for styling
+- Jotai for state management
+- Three.js for 3D animations
+- GSAP for smooth animations
+
+## Target Users
+Professionals, students, developers, freelancers, and anyone looking to improve their productivity and maintain focus during work sessions.
+
+## Creator
+Created by Yash Patidar (@yash__patidar_)
+Published by PicxStudio
+
+## Website
+https://picxstudio.com/
+
+## Use Cases
+- Deep work sessions
+- Study periods
+- Task tracking and completion
+- Productivity habit building
+- Focus improvement training
+- Time management optimization

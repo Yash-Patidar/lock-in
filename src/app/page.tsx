@@ -58,7 +58,7 @@ export default function Home() {
 
   return (
     <Provider>
-      <div className="min-h-screen relative overflow-hidden">
+      <div className="min-h-screen !bg-dark relative overflow-hidden">
         {/* Animated Background */}
         <div className="fixed inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950">
           <DynamicBackground />
