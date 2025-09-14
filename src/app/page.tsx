@@ -14,6 +14,7 @@ import TweetCard from '@/components/TweetCard';
 import DynamicBackground from '@/components/DynamicBackground';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import BlobCursor from '@/components/BlobCursor';
+import SocialLinks from '@/components/SocialLinks';
 import { useAtom, useAtomValue } from 'jotai';
 import { currentThemeAtom, themeColorsAtom } from '@/store/themeAtoms';
 
@@ -49,6 +50,14 @@ export default function Home() {
         case 'Escape':
           setShowWelcomeTweet(false);
           break;
+        case 't':
+        case 'T':
+          // Focus on task input for quick task adding
+          const taskInput = document.querySelector('input[placeholder*="Add a new task"]') as HTMLInputElement;
+          if (taskInput) {
+            taskInput.focus();
+          }
+          break;
       }
     };
 
@@ -76,10 +85,13 @@ export default function Home() {
         />
 
         {/* Theme Switcher */}
-        <ThemeSwitcher 
+        <ThemeSwitcher
           currentTheme={currentTheme}
           onThemeChange={setCurrentTheme}
         />
+
+        {/* Social Links */}
+        <SocialLinks />
 
         {/* Content */}
         <div className="relative z-10 text-white">

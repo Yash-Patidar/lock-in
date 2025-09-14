@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { DefaultSeo } from 'next-seo';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,6 +21,32 @@ export const metadata: Metadata = {
   publisher: "PicxStudio",
   robots: "index, follow",
   category: "Productivity",
+  metadataBase: new URL('https://picxstudio.com/'),
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://picxstudio.com/',
+    siteName: 'Lock-In - Productivity App',
+    title: 'Lock-In - Ultimate Productivity & Focus App | Pomodoro Timer & Task Manager',
+    description: 'Boost your productivity with Lock-In - the ultimate focus app featuring Pomodoro timer, task management, progress heatmap, and beautiful themes. Get more done with less distraction.',
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Lock-In - Ultimate Productivity & Focus App',
+        type: 'image/png',
+      }
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@yash__patidar_',
+    creator: '@yash__patidar_',
+    title: 'Lock-In - Ultimate Productivity & Focus App',
+    description: 'Boost your productivity with Lock-In - the ultimate focus app featuring Pomodoro timer, task management, progress heatmap, and beautiful themes.',
+    images: ['/og.png'],
+  },
 };
 
 export default function RootLayout({
@@ -73,72 +98,18 @@ export default function RootLayout({
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/og.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="theme-color" content="#0ea5e9" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Lock-In" />
+        <meta name="application-name" content="Lock-In" />
+        <meta name="msapplication-TileColor" content="#0ea5e9" />
         <meta name="google-site-verification" content="your-google-verification-code" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <DefaultSeo
-          title="Lock-In - Ultimate Productivity & Focus App"
-          description="Boost your productivity with Lock-In - the ultimate focus app featuring Pomodoro timer, task management, progress heatmap, and beautiful themes. Get more done with less distraction."
-          canonical="https://picxstudio.com/"
-          openGraph={{
-            type: 'website',
-            locale: 'en_US',
-            url: 'https://picxstudio.com/',
-            site_name: 'Lock-In - Productivity App',
-            title: 'Lock-In - Ultimate Productivity & Focus App | Pomodoro Timer & Task Manager',
-            description: 'Boost your productivity with Lock-In - the ultimate focus app featuring Pomodoro timer, task management, progress heatmap, and beautiful themes. Get more done with less distraction.',
-            images: [
-              {
-                url: 'https://picxstudio.com/og.png',
-                width: 1200,
-                height: 630,
-                alt: 'Lock-In - Ultimate Productivity & Focus App',
-                type: 'image/png',
-              }
-            ],
-          }}
-          twitter={{
-            handle: '@yash__patidar_',
-            site: '@yash__patidar_',
-            cardType: 'summary_large_image',
-          }}
-          additionalMetaTags={[
-            {
-              name: 'viewport',
-              content: 'width=device-width, initial-scale=1, maximum-scale=1'
-            },
-            {
-              name: 'theme-color',
-              content: '#0ea5e9'
-            },
-            {
-              name: 'apple-mobile-web-app-capable',
-              content: 'yes'
-            },
-            {
-              name: 'apple-mobile-web-app-status-bar-style',
-              content: 'black-translucent'
-            },
-            {
-              name: 'apple-mobile-web-app-title',
-              content: 'Lock-In'
-            },
-            {
-              name: 'application-name',
-              content: 'Lock-In'
-            },
-            {
-              name: 'msapplication-TileColor',
-              content: '#0ea5e9'
-            },
-            {
-              httpEquiv: 'Content-Security-Policy',
-              content: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:;"
-            }
-          ]}
-        />
         {children}
       </body>
     </html>

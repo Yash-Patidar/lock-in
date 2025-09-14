@@ -5,7 +5,9 @@
       "Bash(pnpm add:*)",
       "WebFetch(domain:llmtxt.org)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:notes.aimodels.fyi)"
+      "WebFetch(domain:notes.aimodels.fyi)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm dlx shadcn@latest add:*)"
     ],
     "deny": [],
     "ask": []

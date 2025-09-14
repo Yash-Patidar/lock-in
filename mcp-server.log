@@ -31,3 +31,8 @@
 {"level":"info","message":"Getting component source for: Dither","service":"react-bits-mcp-server","timestamp":"2025-09-14T04:55:39.119Z"}
 {"level":"info","message":"Found 99 components","service":"react-bits-mcp-server","timestamp":"2025-09-14T04:55:39.146Z"}
 {"level":"info","message":"Successfully retrieved component source for: Dither","service":"react-bits-mcp-server","timestamp":"2025-09-14T04:55:39.147Z"}
+{"level":"info","message":"Starting React Bits MCP Server...","service":"react-bits-mcp-server","timestamp":"2025-09-14T15:39:15.746Z"}
+{"level":"info","message":"Setting up request handlers...","service":"react-bits-mcp-server","timestamp":"2025-09-14T15:39:15.799Z"}
+{"level":"info","message":"Handlers setup complete","service":"react-bits-mcp-server","timestamp":"2025-09-14T15:39:15.801Z"}
+{"level":"info","message":"Transport initialized: stdio","service":"react-bits-mcp-server","timestamp":"2025-09-14T15:39:15.802Z"}
+{"level":"info","message":"Server started successfully","service":"react-bits-mcp-server","timestamp":"2025-09-14T15:39:15.804Z"}
