@@ -2,11 +2,11 @@
 
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef, useCallback } from 'react';
-import { 
-  currentModeAtom, 
-  timeLeftAtom, 
-  isActiveAtom, 
-  activeTaskAtom, 
+import {
+  currentModeAtom,
+  timeLeftAtom,
+  isActiveAtom,
+  activeTaskAtom,
   pomodoroCountAtom,
   tasksAtom,
   TIMER_MODES,
@@ -14,6 +14,7 @@ import {
   notificationAtom,
   heatmapDataAtom
 } from '@/store/atoms';
+import { useState } from 'react';
 
 export default function PomodoroTimer() {
   const [currentMode, setCurrentMode] = useAtom(currentModeAtom);
@@ -24,6 +25,7 @@ export default function PomodoroTimer() {
   const activeTask = useAtomValue(activeTaskAtom);
   const setNotification = useSetAtom(notificationAtom);
   const setHeatmapData = useSetAtom(heatmapDataAtom);
+  const [showSettings, setShowSettings] = useState(false);
   
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -146,7 +148,16 @@ export default function PomodoroTimer() {
   const strokeDasharray = `${progress * circumference} ${circumference}`;
 
   return (
-    <div className="glass-effect rounded-2xl p-4 md:p-8">
+    <div className="glass-effect rounded-2xl p-4 md:p-8 relative">
+      {/* Settings Icon */}
+      <button
+        onClick={() => setShowSettings(true)}
+        className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-700/50 hover:bg-cyan-500/20 border border-gray-600 hover:border-cyan-500/30 flex items-center justify-center transition-all duration-200 group"
+        title="Timer Settings"
+      >
+        <span className="text-gray-400 group-hover:text-cyan-400 transition-colors">⚙️</span>
+      </button>
+
       {/* Mode Switcher */}
       <div className="flex justify-center mb-6 space-x-2">
         {Object.entries(TIMER_MODES).map(([mode, config]) => (
@@ -208,18 +219,18 @@ export default function PomodoroTimer() {
 
         {/* Timer Controls */}
         <div className="flex justify-center gap-4">
-          <button 
+          <button
             onClick={toggleTimer}
-            className="bg-cyan-500 hover:bg-cyan-600 px-6 md:px-8 py-3 rounded-xl flex items-center gap-2 font-semibold transition-all"
+            className="bg-cyan-500 hover:bg-cyan-600 px-6 md:px-8 py-3 rounded-xl flex items-center gap-2 font-semibold transition-all hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30 group"
           >
-            <span>{isActive ? '⏸️' : '▶️'}</span>
+            <span className="group-hover:scale-110 transition-transform">{isActive ? '⏸️' : '▶️'}</span>
             <span>{isActive ? 'Pause' : 'Start'}</span>
           </button>
-          <button 
+          <button
             onClick={resetTimer}
-            className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-xl transition-all"
+            className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-xl transition-all hover:scale-105 hover:shadow-xl group"
           >
-            🔄
+            <span className="group-hover:rotate-180 transition-transform duration-300">🔄</span>
           </button>
         </div>
 
@@ -229,6 +240,31 @@ export default function PomodoroTimer() {
           <div className="text-2xl font-bold">{pomodoroCount} 🍅</div>
         </div>
       </div>
+
+      {/* Settings Modal */}
+      {showSettings && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-900/80 backdrop-blur-xl border border-cyan-500/30 rounded-2xl p-6 max-w-md w-full shadow-2xl shadow-cyan-500/20">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-white">Timer Settings</h3>
+              <button
+                onClick={() => setShowSettings(false)}
+                className="w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div className="text-center text-gray-400 py-4">
+                <div className="text-4xl mb-2">⏱️</div>
+                <p>Timer settings coming soon!</p>
+                <p className="text-sm mt-2">Duration customization, sound settings, and more.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

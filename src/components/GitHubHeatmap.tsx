@@ -1,10 +1,18 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { heatmapDataAtom } from '@/store/atoms';
 
 export default function GitHubHeatmap() {
-  const heatmapData = useAtomValue(heatmapDataAtom);
+  const [heatmapData, setHeatmapData] = useAtom(heatmapDataAtom);
+
+  const handleCellClick = (dateString: string, currentLevel: number) => {
+    const newLevel = currentLevel >= 4 ? 0 : currentLevel + 1;
+    setHeatmapData(prev => ({
+      ...prev,
+      [dateString]: newLevel
+    }));
+  };
 
   const getHeatmapColor = (level: number) => {
     const colors = [
@@ -34,7 +42,8 @@ export default function GitHubHeatmap() {
         <div
           key={i}
           className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm cursor-pointer transition-all hover:scale-110 border ${getHeatmapColor(level)}`}
-          title={`${date.toLocaleDateString()} - Level ${level}`}
+          title={`${date.toLocaleDateString()} - Level ${level} (Click to change)`}
+          onClick={() => handleCellClick(dateString, level)}
         />
       );
     }

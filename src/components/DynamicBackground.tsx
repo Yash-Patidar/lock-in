@@ -1,41 +1,31 @@
 'use client';
 
 import { useAtomValue } from 'jotai';
-import { currentThemeAtom } from '@/store/themeAtoms';
-import Lightning from './Lightning';
+import { themeColorsAtom } from '@/store/themeAtoms';
 
 export default function DynamicBackground() {
-  const currentTheme = useAtomValue(currentThemeAtom);
-
-  // Convert theme to hue values for Lightning component
-  const getThemeHue = () => {
-    switch (currentTheme) {
-      case 'cyan':
-        return 190; // Cyan
-      case 'purple':
-        return 270; // Purple
-      case 'emerald':
-        return 160; // Emerald green
-      case 'amber':
-        return 45;  // Amber/orange
-      case 'rose':
-        return 350; // Rose/pink
-      case 'indigo':
-        return 240; // Indigo
-      default:
-        return 190; // Default cyan
-    }
-  };
+  const themeColors = useAtomValue(themeColorsAtom);
 
   return (
-    <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
-      <Lightning
-        hue={getThemeHue()}
-        xOffset={0}
-        speed={0.5}
-        intensity={0.8}
-        size={1.2}
-      />
-    </div>
+    <div
+      className="w-full h-full absolute top-0 left-0"
+      style={{
+        background: `linear-gradient(135deg,
+          #0a0a0a 0%,
+          #1a1a1a 25%,
+          rgba(${hexToRgb(themeColors.primary)}, 0.03) 50%,
+          #1a1a1a 75%,
+          #0a0a0a 100%)`
+      }}
+    />
   );
+}
+
+// Helper function to convert hex to RGB
+function hexToRgb(hex: string): string {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (result) {
+    return `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`;
+  }
+  return '6, 182, 212'; // fallback cyan
 }

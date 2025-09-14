@@ -9,28 +9,35 @@ import TasksPanel from '@/components/TasksPanel';
 import Heatmap from '@/components/Heatmap';
 import Notification from '@/components/Notification';
 import SettingsModal from '@/components/SettingsModal';
-import KeyboardShortcuts from '@/components/KeyboardShortcuts';
 import TweetCard from '@/components/TweetCard';
 import DynamicBackground from '@/components/DynamicBackground';
-import ThemeSwitcher from '@/components/ThemeSwitcher';
 import BlobCursor from '@/components/BlobCursor';
 import SocialLinks from '@/components/SocialLinks';
-import { useAtom, useAtomValue } from 'jotai';
-import { currentThemeAtom, themeColorsAtom } from '@/store/themeAtoms';
+import DayCompletion from '@/components/DayCompletion';
+import TaskCalendar from '@/components/TaskCalendar';
+import { useAtomValue } from 'jotai';
+import { themeColorsAtom } from '@/store/themeAtoms';
 
 export default function Home() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [showWelcomeTweet, setShowWelcomeTweet] = useState(true);
-  const [currentTheme, setCurrentTheme] = useAtom(currentThemeAtom);
+  const [showWelcomeTweet, setShowWelcomeTweet] = useState(false);
   const themeColors = useAtomValue(themeColorsAtom);
 
   useEffect(() => {
-    // Show welcome tweet for 10 seconds
-    const timer = setTimeout(() => {
-      setShowWelcomeTweet(false);
-    }, 10000);
+    // Check if user has seen welcome tweet before
+    const hasSeenWelcome = localStorage.getItem('lock-in-welcome-seen');
 
-    return () => clearTimeout(timer);
+    if (!hasSeenWelcome) {
+      setShowWelcomeTweet(true);
+
+      // Show welcome tweet for 8 seconds
+      const timer = setTimeout(() => {
+        setShowWelcomeTweet(false);
+        localStorage.setItem('lock-in-welcome-seen', 'true');
+      }, 8000);
+
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   useEffect(() => {
@@ -49,6 +56,7 @@ export default function Home() {
           break;
         case 'Escape':
           setShowWelcomeTweet(false);
+          localStorage.setItem('lock-in-welcome-seen', 'true');
           break;
         case 't':
         case 'T':
@@ -67,9 +75,9 @@ export default function Home() {
 
   return (
     <Provider>
-      <div className="min-h-screen !bg-dark relative overflow-hidden">
-        {/* Animated Background */}
-        <div className="fixed inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950">
+      <div className="min-h-screen bg-gray-950 relative overflow-hidden">
+        {/* Simple Dark Background */}
+        <div className="fixed inset-0">
           <DynamicBackground />
         </div>
 
@@ -84,12 +92,6 @@ export default function Home() {
           shadowBlur={20}
         />
 
-        {/* Theme Switcher */}
-        <ThemeSwitcher
-          currentTheme={currentTheme}
-          onThemeChange={setCurrentTheme}
-        />
-
         {/* Social Links */}
         <SocialLinks />
 
@@ -100,7 +102,10 @@ export default function Home() {
             <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4">
               <div className="relative">
                 <button
-                  onClick={() => setShowWelcomeTweet(false)}
+                  onClick={() => {
+                    setShowWelcomeTweet(false);
+                    localStorage.setItem('lock-in-welcome-seen', 'true');
+                  }}
                   className="absolute -top-2 -right-2 w-8 h-8 bg-gray-800/80 hover:bg-gray-700 rounded-full flex items-center justify-center text-white z-10 transition-colors backdrop-blur-sm border border-gray-600"
                 >
                   ✕
@@ -123,18 +128,10 @@ export default function Home() {
           </div>
           
           <Heatmap />
-          
-          {/* Settings Button */}
-          <button
-            onClick={() => setIsSettingsOpen(true)}
-            className="fixed bottom-4 md:bottom-6 right-4 md:right-6 w-10 h-10 md:w-12 md:h-12 bg-cyan-500/90 hover:bg-cyan-400 backdrop-blur-sm border border-cyan-400/30 rounded-full flex items-center justify-center text-lg md:text-xl transition-all shadow-lg shadow-cyan-500/25 z-40 hover:scale-110"
-          >
-            ⚙️
-          </button>
-          
-          <div className="hidden md:block">
-            <KeyboardShortcuts />
-          </div>
+
+          <DayCompletion />
+          <TaskCalendar />
+
           <Notification />
           <SettingsModal 
             isOpen={isSettingsOpen} 
