@@ -75,9 +75,17 @@ export default function Home() {
 
   return (
     <Provider>
-      <div className="min-h-screen bg-gray-950 relative overflow-hidden">
-        {/* Simple Dark Background */}
-        <div className="fixed inset-0">
+      <div className="min-h-screen app-background relative overflow-hidden">
+        {/* Dark Modal-style Background with Blur */}
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-3xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/20 via-black/40 to-gray-900/20"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.015)_0%,transparent_60%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(99,102,241,0.02)_0%,transparent_60%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.01)_0%,transparent_80%)]"></div>
+        </div>
+
+        {/* Very Subtle Dynamic Background */}
+        <div className="fixed inset-0 opacity-10">
           <DynamicBackground />
         </div>
 

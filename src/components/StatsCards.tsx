@@ -30,18 +30,28 @@ export default function StatsCards() {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="glass-effect rounded-xl p-3 md:p-4 text-center group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 border border-cyan-500/10 hover:border-cyan-500/30 relative"
+            className="glass-effect rounded-2xl p-4 md:p-6 text-center group cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 relative overflow-hidden"
           >
-            <div className="text-xl md:text-2xl mb-1 md:mb-2 group-hover:scale-110 transition-transform duration-300">
+            {/* Subtle gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
+
+            {/* Icon */}
+            <div className="text-2xl md:text-3xl mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">
               {stat.icon}
             </div>
-            <div className={`text-lg md:text-2xl font-bold ${stat.color} group-hover:text-cyan-300 transition-colors duration-300`}>
+
+            {/* Value */}
+            <div className={`text-xl md:text-3xl font-bold text-white group-hover:text-gray-100 transition-colors duration-300 mb-1`}>
               {stat.value}
             </div>
-            <div className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+
+            {/* Label */}
+            <div className="text-xs md:text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300 font-medium">
               {stat.label}
             </div>
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none"></div>
+
+            {/* Subtle bottom border glow */}
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 group-hover:w-3/4 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-500"></div>
           </div>
         ))}
       </div>
