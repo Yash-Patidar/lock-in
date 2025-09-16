@@ -12,7 +12,6 @@ import SettingsModal from '@/components/SettingsModal';
 import TweetCard from '@/components/TweetCard';
 import DynamicBackground from '@/components/DynamicBackground';
 import BlobCursor from '@/components/BlobCursor';
-import SocialLinks from '@/components/SocialLinks';
 import DayCompletion from '@/components/DayCompletion';
 import TaskCalendar from '@/components/TaskCalendar';
 import { useAtomValue } from 'jotai';
@@ -103,9 +102,6 @@ export default function Home() {
 
         {/* Navbar */}
         <Navbar onSettingsOpen={() => setIsSettingsOpen(true)} />
-
-        {/* Social Links */}
-        <SocialLinks />
 
         {/* Content */}
         <div className="relative z-10 text-white">
