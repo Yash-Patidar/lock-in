@@ -311,6 +311,16 @@ body.dark {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* Animation delays for navbar branding */
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+
+/* Enhanced navbar styling */
+.navbar-brand-glow {
+  filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.4));
+}
+
 /* GitHub Heatmap Styles */
 .react-calendar-heatmap {
   line-height: 1;

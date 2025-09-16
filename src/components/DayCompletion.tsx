@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { tasksAtom, notificationAtom } from '@/store/atoms';
 import { indexedDBService, type CompletedDay } from '@/lib/indexeddb';
+import Image from 'next/image';
 
 export default function DayCompletion() {
   const tasks = useAtomValue(tasksAtom);
@@ -168,9 +169,11 @@ export default function DayCompletion() {
 
                   {selectedImage && (
                     <div className="relative">
-                      <img
+                      <Image
                         src={selectedImage}
                         alt="Achievement"
+                        width={400}
+                        height={192}
                         className="w-full h-48 object-cover rounded-lg border border-gray-600"
                       />
                       <button

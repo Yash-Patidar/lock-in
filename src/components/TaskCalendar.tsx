@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { indexedDBService, type CompletedDay } from '@/lib/indexeddb';
+import Image from 'next/image';
 
 export default function TaskCalendar() {
   const [completedDays, setCompletedDays] = useState<CompletedDay[]>([]);
@@ -227,9 +228,11 @@ export default function TaskCalendar() {
               {selectedDay.image && (
                 <div>
                   <h4 className="text-lg font-semibold text-purple-300 mb-3">Achievement Photo</h4>
-                  <img
+                  <Image
                     src={selectedDay.image}
                     alt="Achievement"
+                    width={400}
+                    height={192}
                     className="w-full h-48 object-cover rounded-lg border border-gray-600"
                   />
                 </div>

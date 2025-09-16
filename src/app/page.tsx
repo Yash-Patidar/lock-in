@@ -2,7 +2,7 @@
 
 import { Provider } from 'jotai';
 import { useState, useEffect } from 'react';
-import Header from '@/components/Header';
+import Navbar from '@/components/Navbar';
 import StatsCards from '@/components/StatsCards';
 import PomodoroTimer from '@/components/PomodoroTimer';
 import TasksPanel from '@/components/TasksPanel';
@@ -52,6 +52,7 @@ export default function Home() {
           break;
         case 's':
         case 'S':
+          e.preventDefault();
           setIsSettingsOpen(true);
           break;
         case 'Escape':
@@ -100,6 +101,9 @@ export default function Home() {
           shadowBlur={20}
         />
 
+        {/* Navbar */}
+        <Navbar onSettingsOpen={() => setIsSettingsOpen(true)} />
+
         {/* Social Links */}
         <SocialLinks />
 
@@ -126,19 +130,27 @@ export default function Home() {
             </div>
           )}
 
-          <Header />
-          <StatsCards />
-          
-          {/* Main Content */}
+          {/* Stats Overview */}
+          <div className="pt-16">
+            <StatsCards />
+          </div>
+
+          {/* Main Productivity Tools */}
           <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-4 md:gap-8 mb-8">
             <PomodoroTimer />
             <TasksPanel />
           </div>
-          
-          <Heatmap />
 
-          <DayCompletion />
-          <TaskCalendar />
+          {/* Analytics Section */}
+          <div className="py-8">
+            <Heatmap />
+          </div>
+
+          {/* Progress Tracking */}
+          <div className="py-4">
+            <DayCompletion />
+            <TaskCalendar />
+          </div>
 
           <Notification />
           <SettingsModal 
