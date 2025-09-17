@@ -24,6 +24,17 @@ export default function Navbar({ onSettingsOpen }: NavbarProps) {
       hoverColor: 'hover:border-yellow-400/60 hover:text-yellow-300'
     },
     {
+      href: '/project',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      ),
+      label: 'Pages',
+      color: 'purple',
+      hoverColor: 'hover:border-purple-400/60 hover:text-purple-300'
+    },
+    {
       onClick: onSettingsOpen,
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,7 +117,7 @@ export default function Navbar({ onSettingsOpen }: NavbarProps) {
 
               {/* Social Links */}
               <div className="flex items-center gap-2 ml-2">
-                {socialLinks.map((link, index) => (
+                {socialLinks.map((link) => (
                   <a
                     key={link.name}
                     href={link.url}
